@@ -33,5 +33,25 @@ func routes(_ app: Application) throws {
     return "double of \(number) is \(2 * number)"
   }.description("doubles a number or trhows error if there is no number")
 
+  app.group("api") { api in
+        
+    api.post("greeting") { req -> String in
+      let greeting = try req.content.decode(Greeting.self)
+      return greeting.hello
+    }
+    
+    api.get("hello") { req -> String in
+      let hello = try req.query.decode(Hello.self)
+      return "Hello, \(hello.name ?? "Anonymous")"
+    }
+    
+    api.get("hola") { req -> String in
+      guard let name: String = req.query["name"] else {
+        throw Abort(.badRequest)
+      }
+      return "Hola, \(name)"
+    }
+  }
+
   print(app.routes.all)
 }
