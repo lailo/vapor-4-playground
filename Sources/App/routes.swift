@@ -52,6 +52,12 @@ func routes(_ app: Application) throws {
       return "Hola, \(name)"
     }
   }
+  
+  app.post("users") { req -> CreateUser in
+    try CreateUser.validate(req)
+    let user = try req.content.decode(CreateUser.self)
+    return user
+  }
 
   print(app.routes.all)
 }
