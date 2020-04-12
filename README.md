@@ -1,3 +1,3 @@
-# vapor-4-playground
+# Vapor 4 Playground
 
-A Swift server side framework to try out different things.
+A Swift server side playground to follow the [Vapor 4 Docs](https://docs.vapor.codes/4.0/)
